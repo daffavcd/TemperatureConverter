@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    var materialApp = MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -43,15 +43,7 @@ class _MyAppState extends State<MyApp> {
               Column(
                 children: [
                   Container(
-                    child: TextField(
-                      controller: myController,
-                      decoration: new InputDecoration(
-                          labelText: "Insert temperature in centigrade"),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                    ),
+                    child: Input(myController: myController),
                     padding: const EdgeInsets.all(7.0),
                   ),
                 ],
@@ -136,6 +128,29 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
+    );
+    return materialApp;
+  }
+}
+
+class Input extends StatelessWidget {
+  const Input({
+    Key key,
+    @required this.myController,
+  }) : super(key: key);
+
+  final TextEditingController myController;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: myController,
+      decoration:
+          new InputDecoration(labelText: "Insert temperature in centigrade"),
+      keyboardType: TextInputType.number,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly
+      ],
     );
   }
 }
